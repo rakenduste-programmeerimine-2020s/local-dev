@@ -6,8 +6,6 @@ services:
     command: --auth
     ports:
       - 27017:27017
-    volumes:
-      - './data/mongo:/data/db:delegated'
     environment: 
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
