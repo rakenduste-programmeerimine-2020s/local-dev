@@ -1,18 +1,8 @@
 version: '3.4'
 
 services:
-  mysql:
-    image: 'mysql:8'
-    command: --default-authentication-plugin=mysql_native_password
-    ports:
-      - '3306:3306'
-    volumes:
-      - './data/mysql:/var/lib/mysql:delegated'
-    environment: 
-      MYSQL_ROOT_PASSWORD: 'root'
-    
   mongo:
-    image: mongo:4.2.9
+    image: mongo:latest
     command: --auth
     ports:
       - 27017:27017
@@ -21,10 +11,11 @@ services:
     environment: 
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    container_name: 'mongo'
   
   node-service-one:
     depends_on:
-      - mysql
+      - mongo
     build:
       context: '../rakenduste-programmeerimine-TA-I-node'
     ports:
@@ -32,10 +23,11 @@ services:
     volumes:
       - '../rakenduste-programmeerimine-TA-I-node:/home/node/app:delegated'
     command: 'run start'
+    container_name: 'node-I'
 
   node-service-two:
     depends_on:
-      - mysql
+      - mongo
     build:
       context: '../rakenduste-programmeerimine-TA-II-node'
     ports:
@@ -43,3 +35,4 @@ services:
     volumes:
       - '../rakenduste-programmeerimine-TA-II-node:/home/node/app:delegated'
     command: 'run start'
+    container_name: 'node-II'
