@@ -4,6 +4,13 @@
 
 Download neccessery repositories https://github.com/rakenduste-programmeerimine-2020s 
 
+Install commands 
+```
+docker-compose run --rm --no-deps node-service-one install
+
+docker-compose run --rm --no-deps node-service-two install
+```
+
 Start commands
 
 TA-I
